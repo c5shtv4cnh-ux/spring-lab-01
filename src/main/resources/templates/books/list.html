@@ -9,6 +9,12 @@
 <h1 th:text="${title}">Catalogue</h1>
 <p th:if="${message}" class="flash" th:text="${message}"></p>
 
+<form method="get" action="/books" class="filter">
+    <input name="author" placeholder="Filter by author" th:value="${author}">
+    <button type="submit">Filter</button>
+    <a th:if="${author}" href="/books">Reset</a>
+</form>
+
 <form method="post" action="/books">
     <input name="title" placeholder="Title" required>
     <input name="author" placeholder="Author" required>
@@ -23,6 +29,9 @@
         <td th:text="${book.title}">Title</td>
         <td th:text="${book.author}">Author</td>
         <td th:text="${book.year}">2020</td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(books)}">
+        <td colspan="4">No books found</td>
     </tr>
 </table>
 </body>

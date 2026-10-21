@@ -4,3 +4,5 @@ th, td { border: 1px solid #ccc; padding: 8px 14px; text-align: left; }
 th    { background: #2f3640; color: #fff; }
 .flash { background: #dff9e3; border: 1px solid #44bd32; padding: 10px; }
 form input, form button { padding: 6px; margin-right: 6px; }
+.filter { margin-bottom: 12px; }
+.filter a { margin-left: 4px; }
