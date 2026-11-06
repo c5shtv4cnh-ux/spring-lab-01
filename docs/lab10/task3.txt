@@ -1,0 +1,46 @@
+### TASK 3.4 — access matrix (curl, one cookie jar per actor, Accept: text/html like a browser)
+# each POST /books carries a valid _csrf token from the actor's own session, so the result shows authorisation, not CSRF
+
+--- anonymous  (_csrf=3yybUfgY...)
+GET /                      200
+GET /books                 302 -> /login
+POST /books (create)       302 -> /login
+GET /admin                 302 -> /login
+GET /nowhere               302 -> /login
+
+--- user  (_csrf=iv5OZsWk...)
+GET /                      200
+GET /books                 200
+POST /books (create)       403
+GET /admin                 403
+GET /nowhere               403
+
+--- admin  (_csrf=3PHGa3sX...)
+GET /                      200
+GET /books                 200
+POST /books (create)       302 -> /books
+GET /admin                 200
+GET /nowhere               403
+
+# books titled 'Matrix ...' after the three POST attempts (only admin's was created):
+<td>Matrix admin</td>
+
+# user: POST /books/1/delete with a valid token
+403
+# admin: POST /books/4/delete with a valid token
+302 -> /books
+
+# what each actor sees in the header (sec:authentication / sec:authorize)
+-- user:
+        Logged in as <b>user</b>,
+        roles <code>[ROLE_USER]</code>
+-- admin:
+    <a href="/admin">Administration</a>
+        Logged in as <b>admin</b>,
+        roles <code>[ROLE_ADMIN, ROLE_USER]</code>
+
+# re-run after the individual variant was added (formLogin.loginPage("/login"), defaultSuccessUrl("/books")) — same matrix:
+#            GET /  | GET /books     | POST /books        | GET /admin     | GET /nowhere
+# anonymous  200    | 302 -> /login  | 302 -> /login      | 302 -> /login  | 302 -> /login
+# user       200    | 200            | 403                | 403            | 403
+# admin      200    | 200            | 302 -> /books      | 200            | 403

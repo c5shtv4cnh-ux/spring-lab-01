@@ -1,0 +1,72 @@
+### TASK 2.2 — PasswordHashGenerator (src/test/java/kz/iitu/spring_lab_01/PasswordHashGenerator.java)
+# lines: hash(user123), hash(admin123)
+
+--- run 1
+$2a$10$Gq99tc3/EEqaXFQ7tPSVMuV3jNezSwDoMbZKjuau7cQ1vljMmTTWe
+$2a$10$iTylasHuwX.Qcs6zo6Gur.ou7hfd9QtUJnnmwXPxCTcXNA3OQWcSC
+
+--- run 2
+$2a$10$8MuYOrPfMhvCo8IIX7ocguQJ//ihMZtGhzsI5erNDSkSyVEc3SWxa
+$2a$10$Hol4qIbadO5FfJE0JCjJ1.5InondO5b/dY1nnlgnwlUPT0u0tgVY.
+
+### TASK 2.4 — after restart (Flyway applied V1__security.sql, in-memory manager removed)
+Migrating schema "public" to version "1 - security"
+Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.010s)
+generated-password log lines now: 0
+
+$ psql -d springlab -c "select username, password_hash from app_user;"
+ username |                        password_hash                         
+----------+--------------------------------------------------------------
+ user     | $2a$10$Gq99tc3/EEqaXFQ7tPSVMuV3jNezSwDoMbZKjuau7cQ1vljMmTTWe
+ admin    | $2a$10$iTylasHuwX.Qcs6zo6Gur.ou7hfd9QtUJnnmwXPxCTcXNA3OQWcSC
+(2 строки)
+
+$ psql -d springlab -c "select username, length(password_hash), substr(password_hash,1,7) as prefix, enabled from app_user;"
+ username | hash_length | prefix  | enabled 
+----------+-------------+---------+---------
+ user     |          60 | $2a$10$ | t
+ admin    |          60 | $2a$10$ | t
+(2 строки)
+
+$ psql -d springlab -c "select u.username, r.role from user_role r join app_user u on u.id=r.user_id order by 1,2;"
+ username | role  
+----------+-------
+ admin    | ADMIN
+ admin    | USER
+ user     | USER
+(3 строки)
+
+# login as user/user123
+HTTP/1.1 302 
+Location: http://localhost:8080/
+HTTP/1.1 200 
+# login as admin/admin123
+HTTP/1.1 302 
+Location: http://localhost:8080/
+HTTP/1.1 200 
+# login as user with the wrong password
+HTTP/1.1 302 
+Location: http://localhost:8080/login?error
+# login with an unknown username
+HTTP/1.1 302 
+Location: http://localhost:8080/login?error
+
+### enabled = false for user
+$ psql -d springlab -c "update app_user set enabled = false where username = 'user';"
+UPDATE 1
+# login as user/user123 (correct password, disabled account)
+HTTP/1.1 302 
+Location: http://localhost:8080/login?error
+# following the redirect: GET /login?error then GET /books
+HTTP/1.1 302 
+Location: http://localhost:8080/login
+$ psql -d springlab -c "update app_user set enabled = true where username = 'user';"
+UPDATE 1
+# login as user/user123 again
+HTTP/1.1 302 
+Location: http://localhost:8080/
+HTTP/1.1 200 
+
+# message on the default /login?error page:
+  disabled user, correct password -> <div class="alert alert-danger" role="alert">Invalid credentials</div>
+  wrong password                  -> <div class="alert alert-danger" role="alert">Invalid credentials</div>

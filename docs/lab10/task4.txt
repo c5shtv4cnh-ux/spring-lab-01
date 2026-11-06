@@ -1,0 +1,86 @@
+### TASK 4.1 — the hidden field Thymeleaf inserted into the POST form on /books (logged in as admin)
+<form method="post" action="/books"><input type="hidden" name="_csrf" value="UgS2nReDi2mMqPZDCGly8qV5Kj1n5gd4z0ZW-c8Zj8alzfDBZWKPpS-7vQ2hms92OkRGwZxBBwUG0jZV93ZmmPstvvWRq5Gn"/>
+# name: _csrf ; the same token is also in the logout form and in every delete form
+
+### TASK 4.2 — the three calls from listing 8 (field names of the real form: title, author, year)
+
+# 1a. exactly as in listing 8: POST /login WITHOUT a token
+$ curl -i -c cookies.txt -X POST localhost:8080/login -d "username=admin&password=admin123"
+HTTP/1.1 403 
+Set-Cookie: JSESSIONID=7843B07223F0422539B9903D7A524C67; Path=/; HttpOnly
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 06 Nov 2026 14:39:14 GMT
+
+{"timestamp":"2026-11-06T14:39:14.058Z","status":403,"error":"Forbidden","path":"/login"}
+
+# -> the login form is a POST too, so it is CSRF-protected as well: the login is refused.
+# 1b. so: GET /login first (creates the session and the token), then POST /login with that token
+$ curl -s -c cookies.txt -b cookies.txt localhost:8080/login | grep _csrf
+<input name="_csrf" type="hidden" value="71SaS485CmvqYUGzChrDM8Qi5Ny2ZaQZU6kVi1D86Q4vuOQYjm2tf-4KaVPHBHjSOTf3UqUXyeTXBpA0NssjvGOeiDkZjNR5" />
+$ curl -i -c cookies.txt -b cookies.txt -X POST localhost:8080/login -d "username=admin&password=admin123&_csrf=PKbokynL_YyokDNdllFiACrdaGhqXnRgwxaJP5LkR8spJcVrXZ_fp0j4nrSF9Qo8pXxWYUvoRVALPUBNpnS_CKGGJvwfEfUK"
+HTTP/1.1 302 
+Set-Cookie: JSESSIONID=28357383CDE512DE6AE5182FA455756C; Path=/; HttpOnly
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Location: http://localhost:8080/
+Content-Length: 0
+Date: Fri, 06 Nov 2026 14:39:14 GMT
+
+
+$ cat cookies.txt
+#HttpOnly_localhost	FALSE	/	FALSE	0	JSESSIONID	28357383CDE512DE6AE5182FA455756C
+
+# 2. a POST with the session but WITHOUT the token
+$ curl -i -b cookies.txt -X POST localhost:8080/books -d "title=Forged&author=Mallory&year=2020"
+HTTP/1.1 403 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 06 Nov 2026 14:39:14 GMT
+
+{"timestamp":"2026-11-06T14:39:14.184Z","status":403,"error":"Forbidden","path":"/books"}
+
+# 3. the same request with the token taken from the page
+$ TOKEN=$(curl -s -b cookies.txt localhost:8080/books | grep -o 'name="_csrf"[^>]*value="[^"]*"' | sed ... | head -1)
+$ curl -i -b cookies.txt -X POST localhost:8080/books -d "title=Genuine&author=Admin&year=2020&_csrf=7o83jJWonjJ2FiBuk1JmSTirET2MvGFPMzVj0KA0HcNypu1N2rsP76XMrVBbcxNepX9SfVvNPAS_j1NiBQVX5MRQefEQw9gu"
+HTTP/1.1 302 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Location: http://localhost:8080/books
+Content-Language: ru-KZ
+Content-Length: 0
+Date: Fri, 06 Nov 2026 14:39:14 GMT
+
+
+
+# result in the catalogue:
+<td>Genuine</td>
+
+# 4. extra: a wrong (tampered) token
+HTTP/1.1 403 
+# 5. extra: GET is not CSRF-checked
+HTTP/1.1 200 
+
+# note: the token printed by the grep in 1b and the one sent in the POST differ because each page render
+# masks the same session token with fresh random bytes (XorCsrfTokenRequestAttributeHandler, BREACH protection);
+# both unmask to the same value stored in the HTTP session.

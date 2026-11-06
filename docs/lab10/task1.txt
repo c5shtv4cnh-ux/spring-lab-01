@@ -1,0 +1,149 @@
+### TASK 1.2 — starter added, NO configuration
+
+$ curl -i localhost:8080/books
+HTTP/1.1 401 
+Set-Cookie: JSESSIONID=EEC1587D648B35DD9A70A22774FD20B8; Path=/; HttpOnly
+WWW-Authenticate: Basic realm="Realm", charset="UTF-8"
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 0
+Date: Fri, 06 Nov 2026 14:33:04 GMT
+
+
+
+$ curl -i localhost:8080/api/books
+HTTP/1.1 401 
+Set-Cookie: JSESSIONID=3C34EE1D42AB00AAA89B047F99DE3EE8; Path=/; HttpOnly
+WWW-Authenticate: Basic realm="Realm", charset="UTF-8"
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 0
+Date: Fri, 06 Nov 2026 14:33:04 GMT
+
+
+
+$ curl -i localhost:8080/login | head -40
+HTTP/1.1 200 
+Set-Cookie: JSESSIONID=334E6FBC8598701CB2E4D2EC2AA2A0E6; Path=/; HttpOnly
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: text/html;charset=UTF-8
+Content-Length: 1103
+Date: Fri, 06 Nov 2026 14:33:04 GMT
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign in</title>
+    <link href="/default-ui.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="content">
+      <form class="login-form" method="post" action="/login">
+        <h2>Please sign in</h2>
+
+        <p>
+          <label for="username" class="screenreader">Username</label>
+          <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+        </p>
+        <p>
+          <label for="password" class="screenreader">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password" required>
+        </p>
+
+<input name="_csrf" type="hidden" value="3Mlt1_h2aWRxH3Zg08e7KoP86CdlGsKNxhW83LF2UWCKvjnova0I4shFDFZcKkMG4OqPSbXOxR9QLaag8STZvoRAY1Pujw2J" />
+        <button type="submit" class="primary">Sign in</button>
+      </form>
+
+
+### log line
+Using generated security password: 4e084fe0-90f6-45da-8cec-963213a5a477
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+ :: Spring Boot ::                (v4.1.1)
+2026-11-06T19:33:03.911+05:00  INFO 44455 --- [spring-lab-01] [           main] k.i.s.SpringLab01Application             : Started SpringLab01Application in 0.925 seconds (process running for 1.117)
+
+### same /books request the way a browser sends it (Accept: text/html)
+$ curl -i -H "Accept: text/html" localhost:8080/books
+HTTP/1.1 302 
+Set-Cookie: JSESSIONID=1DB76BC1CCB77198A1C77F770400B995; Path=/; HttpOnly
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Location: http://localhost:8080/login
+Content-Length: 0
+Date: Fri, 06 Nov 2026 14:33:14 GMT
+
+
+### API with the generated password (user / <generated>)
+$ curl -i -u user:4e084fe0-90f6-45da-8cec-963213a5a477 localhost:8080/api/books
+HTTP/1.1 200 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 209
+Date: Fri, 06 Nov 2026 14:33:14 GMT
+
+[{"id":1,"title":"Effective Java","author":"Joshua Bloch","year":2018},{"id":2,"title":"Clean Code","author":"Robert Martin","year":2008},{"id":3,"title":"Spring in Action","author":"Craig Walls","year":2022}]
+
+### TASK 1.3/1.4 — own SecurityFilterChain + in-memory user {noop}user123
+
+$ curl -i -H "Accept: text/html" localhost:8080/books   (anonymous)
+HTTP/1.1 302 
+Location: http://localhost:8080/login
+
+$ curl -i localhost:8080/   (anonymous, permitAll)
+HTTP/1.1 200 
+
+# login as user/user123 (GET /login to get the _csrf token, then POST /login)
+HTTP/1.1 302 
+Location: http://localhost:8080/
+
+$ curl -i -b cookies localhost:8080/books   (as user)
+HTTP/1.1 200 
+<td>1</td> <td>Effective Java</td> <td>Joshua Bloch</td> <td>2018</td> <td>2</td> <td>Clean Code</td> 
+
+$ curl -i -b cookies localhost:8080/nowhere   (as user, no rule -> anyRequest().denyAll())
+HTTP/1.1 403 
+
+$ curl -i localhost:8080/nowhere   (anonymous)
+HTTP/1.1 302 
+Location: http://localhost:8080/login
+
+$ curl -i -b cookies localhost:8080/api/books   (as user; /api/** is not mentioned in any rule)
+HTTP/1.1 403 
+
+# logout (POST /logout with the _csrf token; the token is taken from the /login page because the lab05 /books form does not render one yet — fixed in task 3)
+HTTP/1.1 302 
+Location: http://localhost:8080/?logout
+
+$ curl -i -b cookies localhost:8080/books   (after logout)
+HTTP/1.1 302 
+Location: http://localhost:8080/login
+
+# wrong password
+HTTP/1.1 302 
+Location: http://localhost:8080/login?error

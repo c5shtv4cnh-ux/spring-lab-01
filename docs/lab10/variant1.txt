@@ -1,0 +1,38 @@
+### Individual variant 1 — custom login page
+
+$ curl -i -H "Accept: text/html" localhost:8080/books   (anonymous)
+HTTP/1.1 302 
+Location: http://localhost:8080/login
+
+$ curl localhost:8080/login   (our template, not the generated "Please sign in")
+<h1>Book catalogue — sign in</h1>
+<!-- ?error: set by the failure handler of formLogin; one message for a wrong name AND a wrong password -->
+<!-- ?logout: we arrive here after POST /logout (logoutSuccessUrl("/login?logout")) -->
+<!-- th:action makes Thymeleaf add the hidden _csrf field: the login POST is CSRF-protected too -->
+<form action="/login" method="post" class="login"><input type="hidden" name="_csrf" value="beGpP1q9ezakkQOsfQ9QJDy_Y4wTDcdYdL6ArxZ2CTzoZcYeD4LNW2mNS1WJ8zCcSyJkQlmKTrVyP_F1Rtrili4XMQmMUfcn"/>
+<label for="username">Username</label>
+<input id="username" name="username" autofocus required>
+<label for="password">Password</label>
+<input id="password" name="password" type="password" required>
+<button type="submit">Sign in</button>
+</form>
+
+# wrong password -> redirect to /login?error, page shows the error message
+HTTP/1.1 302 
+Location: http://localhost:8080/login?error
+<p class="error">Invalid username or password.</p>
+
+# unknown user -> the SAME message
+HTTP/1.1 302 
+Location: http://localhost:8080/login?error
+<p class="error">Invalid username or password.</p>
+
+# correct login -> redirect to /books
+HTTP/1.1 302 
+Location: http://localhost:8080/books
+
+# logout (POST with token) -> /login?logout, page shows the logout message
+HTTP/1.1 302 
+Location: http://localhost:8080/login?logout
+<p class="flash">You have been logged out.</p>
+
