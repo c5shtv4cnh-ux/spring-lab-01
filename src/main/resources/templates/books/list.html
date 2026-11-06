@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}">Catalogue</title>
     <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
 <body>
+<header th:replace="~{fragments/header :: header}"></header>
 <h1 th:text="${title}">Catalogue</h1>
 <p th:if="${message}" class="flash" th:text="${message}"></p>
 
-<form method="get" action="/books" class="filter">
+<form method="get" th:action="@{/books}" class="filter">
     <input name="author" placeholder="Filter by author" th:value="${author}">
     <button type="submit">Filter</button>
-    <a th:if="${author}" href="/books">Reset</a>
+    <a th:if="${author}" th:href="@{/books}">Reset</a>
 </form>
 
-<form method="post" action="/books">
+<!-- creating a book is an ADMIN operation; th:action makes Thymeleaf add the hidden _csrf field -->
+<form sec:authorize="hasRole('ADMIN')" method="post" th:action="@{/books}">
     <input name="title" placeholder="Title" required>
     <input name="author" placeholder="Author" required>
     <input name="year" type="number" placeholder="Year" required>
@@ -23,12 +26,17 @@
 </form>
 
 <table>
-    <tr><th>#</th><th>Title</th><th>Author</th><th>Year</th></tr>
+    <tr><th>#</th><th>Title</th><th>Author</th><th>Year</th><th sec:authorize="hasRole('ADMIN')"></th></tr>
     <tr th:each="book : ${books}">
         <td th:text="${book.id}">1</td>
         <td th:text="${book.title}">Title</td>
         <td th:text="${book.author}">Author</td>
         <td th:text="${book.year}">2020</td>
+        <td sec:authorize="hasRole('ADMIN')">
+            <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post" class="inline">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     <tr th:if="${#lists.isEmpty(books)}">
         <td colspan="4">No books found</td>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<h1>Administration — users</h1>
+<table>
+    <tr><th>#</th><th>Username</th><th>Roles</th><th>Enabled</th><th>Password hash (BCrypt)</th></tr>
+    <tr th:each="u : ${users}">
+        <td th:text="${u.id}">1</td>
+        <td th:text="${u.username}">user</td>
+        <td th:text="${#strings.setJoin(u.roles, ', ')}">USER</td>
+        <td th:text="${u.enabled}">true</td>
+        <td><code th:text="${#strings.substring(u.passwordHash, 0, 7)} + '…'">$2a$10$…</code></td>
+    </tr>
+</table>
+</body>
+</html>

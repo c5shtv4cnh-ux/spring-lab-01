@@ -1,5 +1,6 @@
 package kz.iitu.spring_lab_01.catalog;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,10 +30,12 @@ public class BookService {
         return repository.findById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public Book create(Book book) {
         return repository.save(new Book(null, book.title(), book.author(), book.year()));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public Optional<Book> update(long id, Book book) {
         if (repository.findById(id).isEmpty()) {
             return Optional.empty();
@@ -40,6 +43,7 @@ public class BookService {
         return Optional.of(repository.save(new Book(id, book.title(), book.author(), book.year())));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public boolean delete(long id) {
         return repository.deleteById(id);
     }

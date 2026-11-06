@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Lab 10</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<h1>Laboratory work 10 — Spring Security</h1>
+<p th:if="${param.logout}" class="flash">You have been logged out.</p>
+<p><a th:href="@{/books}">Open the catalogue</a></p>
+</body>
+</html>

@@ -5,6 +5,7 @@ import kz.iitu.spring_lab_01.catalog.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,13 @@ public class BookPageController {
         Book saved = service.create(new Book(null, title, author, year));
         redirect.addFlashAttribute("message",
                 "Book «" + saved.title() + "» has been added");
+        return "redirect:/books";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable long id, RedirectAttributes redirect) {
+        service.delete(id);
+        redirect.addFlashAttribute("message", "Book no. " + id + " has been deleted");
         return "redirect:/books";
     }
 }
