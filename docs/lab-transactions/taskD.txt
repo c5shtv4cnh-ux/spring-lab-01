@@ -1,0 +1,48 @@
+### TASK D — optimistic locking with @Version (TaskDOptimisticLockingTests)
+# >>> printed by the test; [tx]/[sql] from the log
+
+>>> D1 copy1 = Account{id=1, owner=Alice, balance=1000.00, version=2}
+>>>    copy2 = Account{id=1, owner=Alice, balance=1000.00, version=2}
+    [tx main] Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Initiating transaction commit
+    [tx main] Committing JPA transaction on EntityManager
+    [sql] update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+>>>    copy1: credit 10.00 committed -> database balance 1010.00, version 3
+    [tx main] Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Initiating transaction rollback
+    [tx main] Rolling back JPA transaction on EntityManager
+>>>    copy2: debit 20.00 REJECTED: ObjectOptimisticLockingFailureException: Row was already updated or deleted by another transaction for entity [kz.iitu.spring_lab_01.bank.Account with id '1']
+>>>    database after the conflict: balance 1010.00, version 3 (the first update was not overwritten)
+    [tx main] Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+>>> D2 T1 loaded Account{id=1, owner=Alice, balance=1000.00, version=3}
+    [tx onPool-worker-1] Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [tx onPool-worker-1] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx onPool-worker-1] Initiating transaction commit
+    [tx onPool-worker-1] Committing JPA transaction on EntityManager
+    [sql] update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+>>>    T2 credited 5.00 and committed -> version 4
+>>>    T1 debits 30.00 and commits ...
+    [tx main] Initiating transaction commit
+    [tx main] Committing JPA transaction on EntityManager
+    [sql] update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+    [tx main] Initiating transaction rollback after commit exception
+    [tx main] Rolling back JPA transaction on EntityManager
+>>>    T1 commit REJECTED: ObjectOptimisticLockingFailureException
+>>>    database: balance 1005.00 (1000 + 5; T1's debit was rolled back)
+>>> D3 someone else changed Alice meanwhile -> version 5
+    [tx main] Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Initiating transaction rollback
+    [tx main] Rolling back JPA transaction on EntityManager
+>>>    conflict detected -> reload the current state and re-apply the operation (a credit is safe to repeat once it was NOT applied)
+    [tx main] Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Initiating transaction commit
+    [tx main] Committing JPA transaction on EntityManager
+    [sql] update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+>>>    database: balance 1101.00, version 6

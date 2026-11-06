@@ -1,0 +1,67 @@
+### TASK A — declarative transactions and rollback (TaskATransactionTests, ./mvnw test)
+# >>> printed by the test; [tx] = JpaTransactionManager DEBUG log; [sql] = Hibernate SQL
+
+>>> A1 before transfer(Alice -> Bob, 100.00)
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+    [tx main] Creating new transaction with name [kz.iitu.spring_lab_01.bank.TransferService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [tx main] Participating in existing transaction
+    [tx main] Initiating transaction commit
+    [tx main] Committing JPA transaction on EntityManager
+    [sql] update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+    [sql] update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+>>> A1 after  transfer(Alice -> Bob, 100.00)
+>>>     Alice = 900.00, Bob = 600.00, audit_log rows = 0
+>>> A2 before transfer(Alice -> Bob, 5000.00)
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+    [tx main] Creating new transaction with name [kz.iitu.spring_lab_01.bank.TransferService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Initiating transaction rollback
+    [tx main] Rolling back JPA transaction on EntityManager
+>>> A2 exception: java.lang.IllegalStateException: Insufficient funds
+>>> A2 after  failed transfer
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+>>> A3 before transferFailingAfterDebit(Alice -> Bob, 100.00)
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+    [tx main] Creating new transaction with name [kz.iitu.spring_lab_01.bank.TransferService.transferFailingAfterDebit]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [sql] update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+    [tx main] Initiating transaction rollback
+    [tx main] Rolling back JPA transaction on EntityManager
+>>> A3 exception: java.lang.RuntimeException: Simulated failure after debit, before credit
+>>> A3 after  - the debit was flushed (UPDATE executed), but the transaction rolled back
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+>>> A4 before transferFailingWithChecked(Alice -> Bob, 100.00)
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+    [tx main] Creating new transaction with name [kz.iitu.spring_lab_01.bank.TransferService.transferFailingWithChecked]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [tx main] Initiating transaction commit
+    [tx main] Committing JPA transaction on EntityManager
+    [sql] update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+>>> A4 exception: kz.iitu.spring_lab_01.bank.TransferException: Checked failure after debit, before credit
+>>> A4 after  - checked exception: the transaction was COMMITTED, Alice lost 100, Bob got nothing
+>>>     Alice = 900.00, Bob = 500.00, audit_log rows = 0
+>>> A5 before transferFailingWithCheckedRollbackFor(Alice -> Bob, 100.00)
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+    [tx main] Creating new transaction with name [kz.iitu.spring_lab_01.bank.TransferService.transferFailingWithCheckedRollbackFor]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-kz.iitu.spr
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [tx main] Initiating transaction rollback
+    [tx main] Rolling back JPA transaction on EntityManager
+>>> A5 exception: kz.iitu.spring_lab_01.bank.TransferException: Checked failure after debit, before credit (rollbackFor)
+>>> A5 after  - rollbackFor = TransferException.class: rolled back
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0

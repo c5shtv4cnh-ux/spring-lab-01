@@ -1,0 +1,38 @@
+### TASK B — propagation REQUIRED vs REQUIRES_NEW (TaskBPropagationTests)
+# >>> printed by the test; [tx] lines show where the inner method joins or suspends the outer transaction
+
+>>> B1 before outer transfer + audit(REQUIRED) + failure
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+    [tx main] Creating new transaction with name [kz.iitu.spring_lab_01.bank.TransferService.transferWithAuditRequiredThenFail]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [tx main] Participating in existing transaction
+    [sql] insert into audit_log (created_at,message) values (?,?)
+    [tx main] Initiating transaction rollback
+    [tx main] Rolling back JPA transaction on EntityManager
+>>> B1 exception: java.lang.IllegalStateException: Outer transaction fails after the audit returned
+>>> B1 after
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+>>> B1 audit record 'B1 transfer 100 (REQUIRED)' exists: false
+>>> B2 before outer transfer + audit(REQUIRES_NEW) + failure
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 0
+    [tx main] Creating new transaction with name [kz.iitu.spring_lab_01.bank.TransferService.transferWithAuditRequiresNewThenFail]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Participating in existing transaction
+    [sql] select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+    [tx main] Suspending current transaction, creating new transaction with name [kz.iitu.spring_lab_01.bank.AuditService.logRequiresNew]
+    [tx main] Participating in existing transaction
+    [sql] insert into audit_log (created_at,message) values (?,?)
+    [tx main] Initiating transaction commit
+    [tx main] Committing JPA transaction on EntityManager
+    [tx main] Resuming suspended transaction after completion of inner transaction
+    [tx main] Initiating transaction rollback
+    [tx main] Rolling back JPA transaction on EntityManager
+>>> B2 exception: java.lang.IllegalStateException: Outer transaction fails after the audit returned
+>>> B2 after
+>>>     Alice = 1000.00, Bob = 500.00, audit_log rows = 1
+>>> B2 audit record 'B2 transfer 100 (REQUIRES_NEW)' exists: true

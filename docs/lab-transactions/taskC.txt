@@ -1,0 +1,45 @@
+### TASK C — isolation on PostgreSQL 16.15 (TaskCIsolationTests)
+# T1 = thread "main" (TransactionTemplate with the isolation level), T2 = pool thread with its own connection
+
+>>> C1 READ_COMMITTED, T1 isolation in the database: read committed
+>>>     T1 first read : 1000.00
+    [tx onPool-worker-1] Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED
+    [tx onPool-worker-1] Initiating transaction commit
+    [tx onPool-worker-1] Committing JPA transaction on EntityManager
+>>>     T2: added 50.00 to Alice and COMMITTED
+>>>     T1 second read: 1050.00  -> non-repeatable read: T1 sees T2's committed change
+    [tx main] Initiating transaction commit
+    [tx main] Committing JPA transaction on EntityManager
+    [tx main] Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+>>> C2 REPEATABLE_READ, T1 isolation in the database: repeatable read
+>>>     T1 first read : 1000.00
+    [tx onPool-worker-1] Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED
+    [tx onPool-worker-1] Initiating transaction commit
+    [tx onPool-worker-1] Committing JPA transaction on EntityManager
+>>>     T2: added 50.00 to Alice and COMMITTED
+>>>     T1 second read: 1000.00  -> same value: T1 works on the snapshot taken at its first query
+    [tx main] Initiating transaction commit
+    [tx main] Committing JPA transaction on EntityManager
+>>>     after both transactions, the database holds: 1050.00
+    [tx main] Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+>>> C3 REPEATABLE_READ, T1 reads, T2 commits a change, then T1 updates the same row
+>>>     T1 first read : 1000.00
+    [tx onPool-worker-1] Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED
+    [tx onPool-worker-1] Initiating transaction commit
+    [tx onPool-worker-1] Committing JPA transaction on EntityManager
+>>>     T2: added 50.00 to Alice and COMMITTED
+    [tx main] Initiating transaction rollback
+    [tx main] Rolling back JPA transaction on EntityManager
+>>>     T1 update failed: CannotAcquireLockException: ERROR: could not serialize access due to concurrent update
+>>>     the database holds: 1050.00 (T2's change kept, T1 rolled back)
+    [tx main] Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED
+>>> C4 READ_COMMITTED, the same scenario as C3
+>>>     T1 first read : 1000.00
+    [tx onPool-worker-1] Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED
+    [tx onPool-worker-1] Initiating transaction commit
+    [tx onPool-worker-1] Committing JPA transaction on EntityManager
+>>>     T2: added 50.00 to Alice and COMMITTED
+>>>     T1 update succeeded (the UPDATE re-reads the latest committed row)
+    [tx main] Initiating transaction commit
+    [tx main] Committing JPA transaction on EntityManager
+>>>     the database holds: 1040.00 (1000 + 50 - 10)
