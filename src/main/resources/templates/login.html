@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in — Book catalogue</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<h1>Book catalogue — sign in</h1>
+
+<!-- ?error: set by the failure handler of formLogin; one message for a wrong name AND a wrong password -->
+<p th:if="${param.error}" class="error">Invalid username or password.</p>
+<!-- ?logout: we arrive here after POST /logout (logoutSuccessUrl("/login?logout")) -->
+<p th:if="${param.logout}" class="flash">You have been logged out.</p>
+
+<!-- th:action makes Thymeleaf add the hidden _csrf field: the login POST is CSRF-protected too -->
+<form th:action="@{/login}" method="post" class="login">
+    <label for="username">Username</label>
+    <input id="username" name="username" autofocus required>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required>
+    <button type="submit">Sign in</button>
+</form>
+</body>
+</html>

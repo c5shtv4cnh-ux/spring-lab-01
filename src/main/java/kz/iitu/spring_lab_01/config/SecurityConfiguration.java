@@ -22,8 +22,11 @@ public class SecurityConfiguration {
                 .requestMatchers("/books/**").hasRole("ADMIN")   // create, edit, delete
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().denyAll())
-            .formLogin(form -> form.permitAll())
-            .logout(logout -> logout.logoutSuccessUrl("/?logout"));
+            .formLogin(form -> form
+                .loginPage("/login")              // variant 1: our own template
+                .defaultSuccessUrl("/books")
+                .permitAll())
+            .logout(logout -> logout.logoutSuccessUrl("/login?logout"));
         return http.build();
     }
 
