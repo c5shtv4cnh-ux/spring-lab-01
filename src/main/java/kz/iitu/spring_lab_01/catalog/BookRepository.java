@@ -38,4 +38,9 @@ public class BookRepository {
     public boolean deleteById(long id) {
         return storage.remove(id) != null;
     }
+
+    /** Lab 12: how many books in the catalogue are written by this author (case-insensitive). */
+    public long countByAuthor(String author) {
+        return storage.values().stream().filter(b -> b.author().equalsIgnoreCase(author)).count();
+    }
 }

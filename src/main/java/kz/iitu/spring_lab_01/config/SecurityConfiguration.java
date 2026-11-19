@@ -22,6 +22,8 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, "/books/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/books/**").hasRole("ADMIN")   // create, edit, delete
                 .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/authors/**").hasAnyRole("USER", "ADMIN")   // lab 12
+                .requestMatchers("/api/authors/**").hasRole("ADMIN")
                 .anyRequest().denyAll())
             .formLogin(form -> form
                 .loginPage("/login")              // our own login template (templates/login.html)
