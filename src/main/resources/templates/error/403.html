@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>403 — Access denied</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<h1>403 — Access denied</h1>
+
+<div class="error">
+    <p sec:authorize="isAuthenticated()">
+        You are logged in as <b sec:authentication="name">user</b>
+        with roles <code sec:authentication="principal.authorities">[ROLE_USER]</code>,
+        but your roles do not allow this request.
+    </p>
+    <p sec:authorize="isAnonymous()">
+        This request was refused (for example, a form was sent without a valid CSRF token).
+    </p>
+    <p th:if="${deniedPath}">
+        Request: <code th:text="${deniedMethod} + ' ' + ${deniedPath}">GET /admin</code>
+        <span th:if="${deniedReason}">(<span th:text="${deniedReason}">AuthorizationDeniedException</span>)</span>
+    </p>
+</div>
+
+<p><a th:href="@{/books}">← Back to the catalogue</a></p>
+</body>
+</html>

@@ -14,19 +14,22 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http, CustomAccessDeniedHandler accessDeniedHandler) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/login", "/css/**", "/error").permitAll()
+                .requestMatchers("/", "/login", "/css/**", "/error",
+                                 CustomAccessDeniedHandler.DENIED_PATH).permitAll()
                 .requestMatchers(HttpMethod.GET, "/books/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/books/**").hasRole("ADMIN")   // create, edit, delete
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().denyAll())
             .formLogin(form -> form
-                .loginPage("/login")              // variant 1: our own template
+                .loginPage("/login")              // our own login template (templates/login.html)
                 .defaultSuccessUrl("/books")
                 .permitAll())
-            .logout(logout -> logout.logoutSuccessUrl("/login?logout"));
+            .logout(logout -> logout.logoutSuccessUrl("/login?logout"))
+            .exceptionHandling(ex -> ex
+                .accessDeniedHandler(accessDeniedHandler));   // variant 3: our own 403 page
         return http.build();
     }
 
