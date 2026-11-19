@@ -1,6 +1,6 @@
 # Lab 10 — Spring Security — summary
 
-Student: Askarkhan Baipanuly (git user.name) · group: not found in the repo · variant: 1 (custom login page; assumed, no variant number was given)
+Student: Askarkhan Baipanuly (git user.name) · group: 2411 · variant: 3 (custom access-denied page)
 Project: /Users/askarhan/Downloads/spring-lab-01, branch `lab10` (from `lab05`), pushed to
 https://github.com/c5shtv4cnh-ux/spring-lab-01/tree/lab10 (commits 8e6a32c, b9b3f68)
 
@@ -24,12 +24,12 @@ security migration is `V1__security.sql` (content identical to the assignment's 
 | GET /admin | 302 → /login | 403 | 200 |
 | GET /nowhere | 302 → /login | 403 | 403 |
 
-  `./mvnw test`: 5 tests, 0 failures (BookServiceMethodSecurityTests proves @PreAuthorize without HTTP).
+  `./mvnw test`: 11 tests, 0 failures (BookServiceMethodSecurityTests proves @PreAuthorize without HTTP).
 - Task 4 (task4.txt): login POST without token 403; with token 302; POST /books without token 403; with token 302 (book created).
-- Variant 1 (variant1.txt): own /login template, ?error and ?logout messages.
+- Variant 3 (variant3.txt): CustomAccessDeniedHandler + templates/error/403.html; user on /admin and /nowhere sees our 403 page (status 403), anonymous still redirected to /login, admin /admin 200. The own /login page stays as part of the login configuration.
 
 ## Files
-task*.txt, variant1.txt — raw curl/psql outputs · screenshots/ — 11 PNG · src/ — changed sources + pom.diff · run*.log — app logs · bin/ — helper scripts used.
+task*.txt, variant3.txt — raw curl/psql outputs · screenshots/ — 14 PNG · src/ — changed sources + pom.diff · run*.log — app logs · bin/ — helper scripts used.
 
 ## Run for the demo
     cd ~/Downloads/spring-lab-01 && ./mvnw spring-boot:run      # PostgreSQL must be running: brew services start postgresql@16

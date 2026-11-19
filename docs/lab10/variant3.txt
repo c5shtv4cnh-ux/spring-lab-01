@@ -1,0 +1,43 @@
+### Individual variant 3 — custom access-denied page (CustomAccessDeniedHandler + templates/error/403.html)
+
+$ curl -i -b user-cookies -H "Accept: text/html" localhost:8080/admin   (user)
+HTTP/1.1 403 
+Content-Type: text/html;charset=UTF-8
+<h1>403 — Access denied</h1>
+<div class="error">
+<p>
+You are logged in as <b>user</b>
+with roles <code>[ROLE_USER]</code>,
+but your roles do not allow this request.
+</p>
+<p>
+Request: <code>GET /admin</code>
+<span>(<span>AuthorizationDeniedException</span>)</span>
+</p>
+</div>
+
+$ curl -i -b user-cookies localhost:8080/nowhere   (user, denyAll)
+HTTP/1.1 403 
+Request: <code>GET /nowhere</code>
+
+$ POST /books as user with a valid _csrf token (create = ADMIN only)
+HTTP/1.1 403 
+
+$ POST /books as admin WITHOUT _csrf (CsrfFilter also uses the AccessDeniedHandler)
+HTTP/1.1 403 
+
+$ curl -i -H "Accept: text/html" localhost:8080/admin   (anonymous — unchanged: redirect, the handler is NOT used)
+HTTP/1.1 302 
+Location: http://localhost:8080/login
+
+$ curl -i -b admin-cookies localhost:8080/admin   (admin — unchanged)
+HTTP/1.1 200 
+
+# application log:
+[ACCESS DENIED] user=user GET /admin : Access Denied
+[ACCESS DENIED] user=user GET /admin : Access Denied
+[ACCESS DENIED] user=user GET /nowhere : Access Denied
+[ACCESS DENIED] user=user GET /nowhere : Access Denied
+[ACCESS DENIED] user=user POST /books : Access Denied
+[ACCESS DENIED] user=admin POST /books : Could not verify the provided CSRF token because no token was found to compare.
+[ACCESS DENIED] user=admin POST /books : Invalid CSRF Token 'null' was found on the request parameter '_csrf' or header 'X-CSRF-TOKEN'.
