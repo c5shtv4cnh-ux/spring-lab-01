@@ -36,10 +36,10 @@ class AuthorServiceTest {
     void anExistingAuthorIsReturnedById() {
         given(authors.findById(4L)).willReturn(Optional.of(new Author(4L, "Frank Herbert", "USA")));
 
-        Author found = service.byId(4L);
+        AuthorDto found = service.byId(4L);
 
-        assertThat(found.getName()).isEqualTo("Frank Herbert");
-        assertThat(found.getCountry()).isEqualTo("USA");
+        assertThat(found.name()).isEqualTo("Frank Herbert");
+        assertThat(found.country()).isEqualTo("USA");
     }
 
     @Test

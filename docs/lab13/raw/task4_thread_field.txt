@@ -1,0 +1,5 @@
+$ curl -s http://127.0.0.1:8080/api/slow    # profile perf (platform threads)
+{"ok":true,"thread":"Thread[#55,http-nio-8080-exec-13,5,main]"}
+
+$ curl -s http://127.0.0.1:8080/api/slow    # profiles perf,vt (virtual threads)
+{"thread":"VirtualThread[#52,tomcat-handler-1]/runnable@ForkJoinPool-1-worker-1","ok":true}

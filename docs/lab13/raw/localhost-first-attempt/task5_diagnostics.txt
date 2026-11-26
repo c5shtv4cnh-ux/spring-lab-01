@@ -1,0 +1,8 @@
+# diagnostic 1: same endpoint, concurrency 100
+  Success rate:	100.00%
+  Requests/sec:	247.0769
+  [200] 2000 responses
+# diagnostic 2: concurrency 200, IPv4 address instead of localhost
+  Success rate:	100.00%
+  Requests/sec:	486.8982
+  [200] 2000 responses

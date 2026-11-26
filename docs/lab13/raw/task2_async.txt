@@ -1,0 +1,16 @@
+$ curl -s -w '\ntime_total=%{time_total}s\n' -X POST http://localhost:8080/api/signup -H 'Content-Type: application/json' -d '{"username":"reader_1795725883","password":"secret123"}'
+{"username":"reader_1795725883","id":5,"thread":"http-nio-8080-exec-2"}
+time_total=0.080824s
+--- application log:
+01:44:43.565 [nio-8080-exec-2] SignupController: signup of user 5 handled on http-nio-8080-exec-2
+01:44:43.568 [async-2] NotificationService: sending welcome e-mail to user 5 (reader_1795725883) on async-2
+01:44:45.573 [async-2] NotificationService: welcome e-mail to user 5 sent on async-2
+
+$ curl -s -w '\ntime_total=%{time_total}s\n' -X POST http://localhost:8080/api/signup/self-invocation -H 'Content-Type: application/json' -d '{"username":"reader_1795725883_self","password":"secret123"}'
+{"username":"reader_1795725883_self","id":6,"thread":"http-nio-8080-exec-4"}
+time_total=2.091452s
+--- application log:
+01:44:46.188 [nio-8080-exec-4] SignupController: signup of user 6 handled on http-nio-8080-exec-4 (self-invocation variant)
+01:44:46.190 [nio-8080-exec-4] NotificationService: sending welcome e-mail to user 6 (reader_1795725883_self) on http-nio-8080-exec-4
+01:44:48.195 [nio-8080-exec-4] NotificationService: welcome e-mail to user 6 sent on http-nio-8080-exec-4
+

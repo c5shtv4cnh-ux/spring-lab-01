@@ -1,0 +1,33 @@
+$ psql springlab -c "insert into loan (username, book_title, due_date) values ('user', 'Refactoring', current_date - 1)"
+INSERT 0 1
+--- application log (OverdueMarkingJob, demo cron 0/20 * * * * *, zone Asia/Almaty):
+01:44:00.086 [sched-1] OverdueMarkingJob: overdue marking for 2026-11-27: 0 loan(s) newly marked, 2 overdue in total (thread sched-1)
+01:44:20.015 [sched-1] OverdueMarkingJob: overdue marking for 2026-11-27: 0 loan(s) newly marked, 2 overdue in total (thread sched-1)
+01:44:40.011 [sched-1] OverdueMarkingJob: overdue marking for 2026-11-27: 0 loan(s) newly marked, 2 overdue in total (thread sched-1)
+01:45:00.021 [sched-1] OverdueMarkingJob: overdue marking for 2026-11-27: 1 loan(s) newly marked, 3 overdue in total (thread sched-1)
+01:45:20.053 [sched-1] OverdueMarkingJob: overdue marking for 2026-11-27: 0 loan(s) newly marked, 3 overdue in total (thread sched-1)
+
+$ psql springlab -c "select id, username, book_title, due_date, returned, overdue from loan order by id"
+ id | username |    book_title    |  due_date  | returned | overdue 
+----+----------+------------------+------------+----------+---------
+  1 | user     | Effective Java   | 2026-11-17 | f        | t
+  2 | user     | Clean Code       | 2026-11-24 | f        | t
+  3 | admin    | Spring in Action | 2026-11-22 | t        | f
+  4 | admin    | Dune             | 2026-12-04 | f        | f
+  5 | user     | Refactoring      | 2026-11-26 | f        | t
+(5 строк)
+
+--- real nightly run, default cron 0 0 2 * * *, zone Asia/Almaty (perf instance started at 01:51):
+02:00:00.217 [sched-1] OverdueMarkingJob: overdue marking for 2026-11-27: 1 loan(s) newly marked, 4 overdue in total (thread sched-1)
+
+$ psql springlab -c "select id, username, book_title, due_date, returned, overdue from loan order by id"
+ id | username |      book_title      |  due_date  | returned | overdue 
+----+----------+----------------------+------------+----------+---------
+  1 | user     | Effective Java       | 2026-11-17 | f        | t
+  2 | user     | Clean Code           | 2026-11-24 | f        | t
+  3 | admin    | Spring in Action     | 2026-11-22 | t        | f
+  4 | admin    | Dune                 | 2026-12-04 | f        | f
+  5 | user     | Refactoring          | 2026-11-26 | f        | t
+  6 | user     | Domain-Driven Design | 2026-11-25 | f        | t
+(6 строк)
+

@@ -2,6 +2,7 @@ package kz.iitu.spring_lab_01.web;
 
 import kz.iitu.spring_lab_01.author.Author;
 import kz.iitu.spring_lab_01.author.AuthorController;
+import kz.iitu.spring_lab_01.author.AuthorDto;
 import kz.iitu.spring_lab_01.author.AuthorNotFoundException;
 import kz.iitu.spring_lab_01.author.AuthorService;
 import kz.iitu.spring_lab_01.config.CustomAccessDeniedHandler;
@@ -39,7 +40,7 @@ class AuthorControllerTest {
     @Test
     @WithMockUser(roles = "USER")
     void anExistingAuthorIsReturnedAsJson() throws Exception {
-        given(service.byId(4L)).willReturn(new Author(4L, "Frank Herbert", "USA"));
+        given(service.byId(4L)).willReturn(new AuthorDto(4L, "Frank Herbert", "USA"));
 
         mockMvc.perform(get("/api/authors/4"))
                .andExpect(status().isOk())

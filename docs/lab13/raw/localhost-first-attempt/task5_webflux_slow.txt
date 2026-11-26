@@ -1,0 +1,51 @@
+$ oha --no-tui -n 2000 -c 200 http://localhost:8081/slow
+Summary:
+  Success rate:	85.35%
+  Total:	3764.6565 ms
+  Slowest:	436.8958 ms
+  Fastest:	402.1914 ms
+  Average:	418.4447 ms
+  Requests/sec:	531.2570
+
+  Total data:	55.01 KiB
+  Size/request:	33 B
+  Size/sec:	14.61 KiB
+
+Response time histogram:
+  402.191 ms [1]   |
+  405.662 ms [7]   |
+  409.132 ms [94]  |■■■■■■■
+  412.603 ms [247] |■■■■■■■■■■■■■■■■■■■■
+  416.073 ms [299] |■■■■■■■■■■■■■■■■■■■■■■■■■
+  419.544 ms [377] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  423.014 ms [239] |■■■■■■■■■■■■■■■■■■■■
+  426.484 ms [213] |■■■■■■■■■■■■■■■■■■
+  429.955 ms [170] |■■■■■■■■■■■■■■
+  433.425 ms [58]  |■■■■
+  436.896 ms [2]   |
+
+Response time distribution:
+  10.00% in 410.1843 ms
+  25.00% in 413.5138 ms
+  50.00% in 418.1516 ms
+  75.00% in 423.1633 ms
+  90.00% in 427.6088 ms
+  95.00% in 429.5167 ms
+  99.00% in 431.0069 ms
+  99.90% in 436.1795 ms
+  99.99% in 436.8958 ms
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	2.9792 ms, 0.0497 ms, 5.2906 ms
+  DNS-lookup:	0.0057 ms, 0.0010 ms, 0.1980 ms
+  First byte:	418.4443 ms, 402.1911 ms, 436.8955 ms
+
+Status code distribution:
+  [200] 1707 responses
+
+Error distribution:
+  [277] Connection reset by peer (os error 54)
+  [9] error writing a body to connection
+  [4] operation was canceled
+  [3] connection error

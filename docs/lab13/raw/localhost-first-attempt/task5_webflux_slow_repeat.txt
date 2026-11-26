@@ -1,0 +1,51 @@
+$ oha --no-tui -n 2000 -c 200 http://localhost:8081/slow   # repeat
+Summary:
+  Success rate:	81.30%
+  Total:	3699.3432 ms
+  Slowest:	435.6158 ms
+  Fastest:	400.2364 ms
+  Average:	408.8128 ms
+  Requests/sec:	540.6365
+
+  Total data:	52.40 KiB
+  Size/request:	33 B
+  Size/sec:	14.16 KiB
+
+Response time histogram:
+  400.236 ms [1]   |
+  403.774 ms [574] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  407.312 ms [247] |■■■■■■■■■■■■■
+  410.850 ms [284] |■■■■■■■■■■■■■■■
+  414.388 ms [205] |■■■■■■■■■■■
+  417.926 ms [59]  |■■■
+  421.464 ms [81]  |■■■■
+  425.002 ms [125] |■■■■■■
+  428.540 ms [10]  |
+  432.078 ms [22]  |■
+  435.616 ms [18]  |■
+
+Response time distribution:
+  10.00% in 401.1139 ms
+  25.00% in 402.2609 ms
+  50.00% in 407.0337 ms
+  75.00% in 411.7171 ms
+  90.00% in 421.9111 ms
+  95.00% in 422.8662 ms
+  99.00% in 432.4944 ms
+  99.90% in 435.1459 ms
+  99.99% in 435.6158 ms
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	1.3906 ms, 0.1249 ms, 3.3959 ms
+  DNS-lookup:	0.0122 ms, 0.0007 ms, 0.3395 ms
+  First byte:	408.8126 ms, 400.2363 ms, 435.6147 ms
+
+Status code distribution:
+  [200] 1626 responses
+
+Error distribution:
+  [223] connection error
+  [97] Connection reset by peer (os error 54)
+  [42] error writing a body to connection
+  [12] operation was canceled

@@ -1,0 +1,44 @@
+$ curl -s -b $JAR http://localhost:8080/api/authors/4
+{"id":4,"name":"Frank Herbert","country":"USA"}
+--- SQL logged by the application for this request:
+01:44:14.458 [io-8080-exec-10] select a1_0.id,a1_0.country,a1_0.name from author a1_0 where a1_0.id=?
+(end)
+
+$ curl -s -b $JAR http://localhost:8080/api/authors/4
+{"id":4,"name":"Frank Herbert","country":"USA"}
+--- SQL logged by the application for this request:
+(end)
+
+$ curl -s -b $JAR -X PUT http://localhost:8080/api/authors/4 -H 'Content-Type: application/json' -H 'X-CSRF-TOKEN: <token>' -d '{"name":"Frank Patrick Herbert","country":"USA"}'
+{"id":4,"name":"Frank Patrick Herbert","country":"USA"}
+--- SQL logged by the application for this request:
+01:44:15.588 [nio-8080-exec-4] select a1_0.id,a1_0.country,a1_0.name from author a1_0 where a1_0.id=?
+01:44:15.600 [nio-8080-exec-4] update author set country=?,name=? where id=?
+(end)
+
+$ curl -s -b $JAR http://localhost:8080/api/authors/4
+{"id":4,"name":"Frank Patrick Herbert","country":"USA"}
+--- SQL logged by the application for this request:
+01:44:16.149 [nio-8080-exec-6] select a1_0.id,a1_0.country,a1_0.name from author a1_0 where a1_0.id=?
+(end)
+
+$ curl -s -b $JAR http://localhost:8080/api/authors/4
+{"id":4,"name":"Frank Patrick Herbert","country":"USA"}
+--- SQL logged by the application for this request:
+(end)
+
+$ curl -s -b $JAR http://localhost:8080/actuator/caches
+{"cacheManagers":{"cacheManager":{"caches":{"authors":{"target":"com.github.benmanes.caffeine.cache.BoundedLocalCache$BoundedLocalManualCache"}}}}}
+--- SQL logged by the application for this request:
+(end)
+
+$ curl -s -b $JAR 'http://localhost:8080/actuator/metrics/cache.gets?tag=cache:authors&tag=result:hit'
+{"availableTags":[{"tag":"cache.manager","values":["cacheManager"]},{"tag":"name","values":["authors"]}],"description":"The number of times cache lookup methods have returned a cached (hit) or uncached (newly loaded or null) value (miss).","measurements":[{"statistic":"COUNT","value":2.0}],"name":"cache.gets"}
+--- SQL logged by the application for this request:
+(end)
+
+$ curl -s -b $JAR 'http://localhost:8080/actuator/metrics/cache.gets?tag=cache:authors&tag=result:miss'
+{"availableTags":[{"tag":"cache.manager","values":["cacheManager"]},{"tag":"name","values":["authors"]}],"description":"The number of times cache lookup methods have returned a cached (hit) or uncached (newly loaded or null) value (miss).","measurements":[{"statistic":"COUNT","value":2.0}],"name":"cache.gets"}
+--- SQL logged by the application for this request:
+(end)
+

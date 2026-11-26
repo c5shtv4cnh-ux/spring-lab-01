@@ -29,6 +29,13 @@ public class AppUser {
 
     protected AppUser() { }
 
+    /** Lab 13: a self-registered user (POST /api/signup) gets the role USER. */
+    public AppUser(String username, String passwordHash) {
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.roles.add("USER");
+    }
+
     public Long getId() { return id; }
     public String getUsername() { return username; }
     public String getPasswordHash() { return passwordHash; }

@@ -1,0 +1,23 @@
+01:47:32.921 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [kz.iitu.reactive_demo.SlowReactiveControllerTest]: SlowReactiveControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:47:32.972 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration kz.iitu.reactive_demo.ReactiveDemoApplication for test class kz.iitu.reactive_demo.SlowReactiveControllerTest
+01:47:32.973 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [kz.iitu.reactive_demo.SlowReactiveControllerTest]: SlowReactiveControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:47:32.977 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration kz.iitu.reactive_demo.ReactiveDemoApplication for test class kz.iitu.reactive_demo.SlowReactiveControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-11-27T01:47:33.137+05:00  INFO 24602 --- [reactive-demo] [           main] k.i.r.SlowReactiveControllerTest         : Starting SlowReactiveControllerTest using Java 21.0.12.1 with PID 24602 (started by askarhan in /Users/askarhan/Downloads/Spring AOP/spring-lab-01/reactive-demo)
+2026-11-27T01:47:33.138+05:00  INFO 24602 --- [reactive-demo] [           main] k.i.r.SlowReactiveControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2026-11-27T01:47:33.435+05:00  INFO 24602 --- [reactive-demo] [           main] k.i.r.SlowReactiveControllerTest         : Started SlowReactiveControllerTest in 0.432 seconds (process running for 0.839)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/Users/askarhan/.m2/repository/net/bytebuddy/byte-buddy-agent/1.18.11/byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release

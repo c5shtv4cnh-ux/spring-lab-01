@@ -1,0 +1,681 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-11-27T01:47:44.384+05:00  INFO 24879 --- [reactive-demo] [           main] k.i.r.ReactiveDemoApplication            : Starting ReactiveDemoApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 24879 (/Users/askarhan/Downloads/Spring AOP/spring-lab-01/reactive-demo/target/reactive-demo-0.0.1-SNAPSHOT.jar started by askarhan in /Users/askarhan/Downloads/Spring AOP/spring-lab-01/reactive-demo)
+2026-11-27T01:47:44.386+05:00  INFO 24879 --- [reactive-demo] [           main] k.i.r.ReactiveDemoApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-11-27T01:47:44.832+05:00  INFO 24879 --- [reactive-demo] [           main] o.s.boot.reactor.netty.NettyWebServer    : Netty started on port 8081 (http)
+2026-11-27T01:47:44.838+05:00  INFO 24879 --- [reactive-demo] [           main] k.i.r.ReactiveDemoApplication            : Started ReactiveDemoApplication in 0.616 seconds (process running for 0.821)
+2026-11-27T01:48:35.851+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [1d76960c, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x1d76960c, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:48:35.854+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-7] reactor.netty.channel.FluxReceive        : [1d76960c-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:48:35.855+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [c9c0fcd8, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0xc9c0fcd8, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:48:35.855+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-6] reactor.netty.channel.FluxReceive        : [c9c0fcd8-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:48:35.855+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [b01f05b3, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:62062] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0xb01f05b3, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:62062]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:48:35.855+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-7] reactor.netty.channel.FluxReceive        : [b01f05b3-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:62062] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.971+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [8ad92d44, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x8ad92d44, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.976+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-5] reactor.netty.channel.FluxReceive        : [8ad92d44-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.975+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [1a860010, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x1a860010, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.976+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-7] reactor.netty.channel.FluxReceive        : [1a860010-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.976+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [835e6aa5, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x835e6aa5, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.976+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-8] reactor.netty.channel.FluxReceive        : [835e6aa5-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.976+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [33c941a7, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x33c941a7, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.977+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-2] reactor.netty.channel.FluxReceive        : [33c941a7-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.977+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [bf6d8f16, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0xbf6d8f16, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.977+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-3] reactor.netty.channel.FluxReceive        : [bf6d8f16-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.977+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [cc55c356, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0xcc55c356, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.977+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-4] reactor.netty.channel.FluxReceive        : [cc55c356-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.977+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [843714f4, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x843714f4, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.977+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-5] reactor.netty.channel.FluxReceive        : [843714f4-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.977+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [8863473c, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x8863473c, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.978+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-6] reactor.netty.channel.FluxReceive        : [8863473c-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.978+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [4b1b288a, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x4b1b288a, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.978+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-7] reactor.netty.channel.FluxReceive        : [4b1b288a-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.978+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [c4f25956, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0xc4f25956, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.978+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-3] reactor.netty.channel.FluxReceive        : [c4f25956-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.978+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [fa29b2f4, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0xfa29b2f4, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.979+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-6] reactor.netty.channel.FluxReceive        : [fa29b2f4-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:60686] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.979+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [f172822a, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0xf172822a, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.979+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [140635aa, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x140635aa, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.979+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-3] reactor.netty.channel.FluxReceive        : [f172822a-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.979+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-4] reactor.netty.channel.FluxReceive        : [140635aa-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.980+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [3b605c39, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x3b605c39, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.980+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-3] reactor.netty.channel.FluxReceive        : [3b605c39-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.980+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [95e2e817, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0x95e2e817, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.980+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-4] reactor.netty.channel.FluxReceive        : [95e2e817-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:8463] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T01:49:03.980+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-1] r.netty.transport.TransportConnector     : [adf89f28, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423] Failed to set channel option 'TCP_NODELAY' with value 'true' for channel '[id: 0xadf89f28, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423]'
+
+io.netty.channel.ChannelException: java.net.SocketException: Invalid argument
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:255) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setOption(DefaultSocketChannelConfig.java:108) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel$NioSocketChannelConfig.setOption(NioSocketChannel.java:491) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at reactor.netty.transport.TransportConnector.setChannelOptions(TransportConnector.java:211) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at reactor.netty.transport.ServerTransport$Acceptor.channelRead(ServerTransport.java:429) ~[reactor-netty-core-1.3.7.jar!/:1.3.7]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:100) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:445) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysOptimized(NioIoHandler.java:571) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:512) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.17.Final.jar!/:4.2.17.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.SocketException: Invalid argument
+	at java.base/sun.nio.ch.Net.setIntOption0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:457) ~[na:na]
+	at java.base/sun.nio.ch.Net.setSocketOption(Net.java:395) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.setOption(SocketChannelImpl.java:287) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setBooleanOption(SocketAdaptor.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketAdaptor.setTcpNoDelay(SocketAdaptor.java:238) ~[na:na]
+	at io.netty.channel.socket.DefaultSocketChannelConfig.setTcpNoDelay(DefaultSocketChannelConfig.java:253) ~[netty-transport-4.2.17.Final.jar!/:4.2.17.Final]
+	... 20 common frames omitted
+
+2026-11-27T01:49:03.981+05:00  WARN 24879 --- [reactive-demo] [ctor-http-nio-3] reactor.netty.channel.FluxReceive        : [adf89f28-1, L:/[0:0:0:0:0:0:0:1]:8081 - R:/1.0.0.0:59423] An exception has been observed post termination, use DEBUG level to see the full stack: java.net.SocketException: Connection reset
+2026-11-27T02:02:00.176+05:00  INFO 24879 --- [reactive-demo] [ionShutdownHook] o.s.boot.reactor.netty.GracefulShutdown  : Commencing graceful shutdown. Waiting for active requests to complete
+2026-11-27T02:02:00.179+05:00  INFO 24879 --- [reactive-demo] [ netty-shutdown] o.s.boot.reactor.netty.GracefulShutdown  : Graceful shutdown complete

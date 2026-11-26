@@ -1,0 +1,51 @@
+$ oha --no-tui -n 2000 -c 200 http://localhost:8081/blocking
+Summary:
+  Success rate:	7.05%
+  Total:	7.2971 sec
+  Slowest:	7.2945 sec
+  Fastest:	0.4144 sec
+  Average:	3.7827 sec
+  Requests/sec:	274.0811
+
+  Total data:	5.65 KiB
+  Size/request:	41 B
+  Size/sec:	792 B
+
+Response time histogram:
+  0.414 sec [1]  |■■
+  1.102 sec [15] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  1.790 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  2.478 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  3.166 sec [8]  |■■■■■■■■■■■■■■■■
+  3.854 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  4.542 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  5.230 sec [8]  |■■■■■■■■■■■■■■■■
+  5.918 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  6.606 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  7.294 sec [13] |■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+Response time distribution:
+  10.00% in 0.8218 sec
+  25.00% in 2.0314 sec
+  50.00% in 3.6563 sec
+  75.00% in 5.6742 sec
+  90.00% in 6.4886 sec
+  95.00% in 6.8954 sec
+  99.00% in 7.2927 sec
+  99.90% in 7.2945 sec
+  99.99% in 7.2945 sec
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	0.0025 sec, 0.0009 sec, 0.0032 sec
+  DNS-lookup:	0.0000 sec, 0.0000 sec, 0.0007 sec
+  First byte:	3.7827 sec, 0.4144 sec, 7.2945 sec
+
+Status code distribution:
+  [200] 141 responses
+
+Error distribution:
+  [1065] connection error
+  [766] Connection reset by peer (os error 54)
+  [22] error writing a body to connection
+  [6] operation was canceled

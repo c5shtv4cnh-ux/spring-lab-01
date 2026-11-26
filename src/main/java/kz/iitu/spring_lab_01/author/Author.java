@@ -29,6 +29,12 @@ public class Author {
         this.id = id;
     }
 
+    /** Lab 13: used by AuthorService.update (a write path that evicts the cache). */
+    public void change(String name, String country) {
+        this.name = name;
+        this.country = country;
+    }
+
     public Long getId() { return id; }
     public String getName() { return name; }
     public String getCountry() { return country; }

@@ -1,0 +1,45 @@
+$ oha --no-tui -n 2000 -c 200 http://localhost:8080/api/slow
+Summary:
+  Success rate:	100.00%
+  Total:	32.4687 sec
+  Slowest:	3.6754 sec
+  Fastest:	0.4015 sec
+  Average:	3.1043 sec
+  Requests/sec:	61.5978
+
+  Total data:	122.34 KiB
+  Size/request:	62 B
+  Size/sec:	3.77 KiB
+
+Response time histogram:
+  0.401 sec [1]    |
+  0.729 sec [27]   |
+  1.056 sec [25]   |
+  1.384 sec [25]   |
+  1.711 sec [25]   |
+  2.038 sec [0]    |
+  2.366 sec [25]   |
+  2.693 sec [24]   |
+  3.021 sec [25]   |
+  3.348 sec [1804] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  3.675 sec [19]   |
+
+Response time distribution:
+  10.00% in 3.2282 sec
+  25.00% in 3.2362 sec
+  50.00% in 3.2426 sec
+  75.00% in 3.2495 sec
+  90.00% in 3.2559 sec
+  95.00% in 3.2612 sec
+  99.00% in 3.2785 sec
+  99.90% in 3.6569 sec
+  99.99% in 3.6754 sec
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	0.0024 sec, 0.0017 sec, 0.0029 sec
+  DNS-lookup:	0.0000 sec, 0.0000 sec, 0.0001 sec
+  First byte:	3.1043 sec, 0.4015 sec, 3.6754 sec
+
+Status code distribution:
+  [200] 2000 responses

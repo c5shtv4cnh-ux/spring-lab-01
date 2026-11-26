@@ -16,9 +16,6 @@ public class AuthorController {
     public record AuthorRequest(@NotBlank @Size(max = 120) String name,
                                 @Size(max = 60) String country) { }
 
-    public record AuthorResponse(Long id, String name, String country) {
-        static AuthorResponse of(Author a) { return new AuthorResponse(a.getId(), a.getName(), a.getCountry()); }
-    }
 
     private final AuthorService service;
 
@@ -27,19 +24,25 @@ public class AuthorController {
     }
 
     @GetMapping
-    public List<AuthorResponse> search(@RequestParam(required = false) String q) {
-        return service.search(q).stream().map(AuthorResponse::of).toList();
+    public List<AuthorDto> search(@RequestParam(required = false) String q) {
+        return service.search(q).stream().map(AuthorDto::of).toList();
     }
 
     @GetMapping("/{id}")
-    public AuthorResponse byId(@PathVariable long id) {
-        return AuthorResponse.of(service.byId(id));
+    public AuthorDto byId(@PathVariable long id) {
+        return service.byId(id);
+    }
+
+    /** Lab 13: update — evicts the cached author. */
+    @PutMapping("/{id}")
+    public AuthorDto update(@PathVariable long id, @Valid @RequestBody AuthorRequest request) {
+        return service.update(id, request.name(), request.country());
     }
 
     @PostMapping
-    public ResponseEntity<AuthorResponse> create(@Valid @RequestBody AuthorRequest request) {
+    public ResponseEntity<AuthorDto> create(@Valid @RequestBody AuthorRequest request) {
         Author saved = service.create(request.name(), request.country());
-        return ResponseEntity.created(URI.create("/api/authors/" + saved.getId())).body(AuthorResponse.of(saved));
+        return ResponseEntity.created(URI.create("/api/authors/" + saved.getId())).body(AuthorDto.of(saved));
     }
 
     @DeleteMapping("/{id}")

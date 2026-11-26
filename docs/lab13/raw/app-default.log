@@ -1,0 +1,110 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-11-27T01:43:42.873+05:00  INFO 22555 --- [spring-lab-01] [           main] k.i.s.SpringLab01Application             : Starting SpringLab01Application v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 22555 (/Users/askarhan/Downloads/Spring AOP/spring-lab-01/target/spring-lab-01-0.0.1-SNAPSHOT.jar started by askarhan in /Users/askarhan/Downloads/Spring AOP/spring-lab-01)
+2026-11-27T01:43:42.875+05:00  INFO 22555 --- [spring-lab-01] [           main] k.i.s.SpringLab01Application             : No active profile set, falling back to 1 default profile: "default"
+2026-11-27T01:43:43.248+05:00  INFO 22555 --- [spring-lab-01] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-27T01:43:43.268+05:00  INFO 22555 --- [spring-lab-01] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 3 JPA repository interfaces.
+2026-11-27T01:43:43.660+05:00  INFO 22555 --- [spring-lab-01] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-11-27T01:43:43.671+05:00  INFO 22555 --- [spring-lab-01] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-27T01:43:43.671+05:00  INFO 22555 --- [spring-lab-01] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-11-27T01:43:43.681+05:00  INFO 22555 --- [spring-lab-01] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 790 ms
+2026-11-27T01:43:43.896+05:00  INFO 22555 --- [spring-lab-01] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-27T01:43:43.958+05:00  INFO 22555 --- [spring-lab-01] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@164dea80
+2026-11-27T01:43:43.959+05:00  INFO 22555 --- [spring-lab-01] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-27T01:43:43.969+05:00  INFO 22555 --- [spring-lab-01] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/springlab (PostgreSQL 16.15)
+2026-11-27T01:43:44.004+05:00  INFO 22555 --- [spring-lab-01] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.013s)
+2026-11-27T01:43:44.019+05:00  INFO 22555 --- [spring-lab-01] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 3
+2026-11-27T01:43:44.020+05:00  INFO 22555 --- [spring-lab-01] [           main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-11-27T01:43:44.065+05:00  INFO 22555 --- [spring-lab-01] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-27T01:43:44.089+05:00  INFO 22555 --- [spring-lab-01] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-11-27T01:43:44.277+05:00  INFO 22555 --- [spring-lab-01] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-27T01:43:44.316+05:00  INFO 22555 --- [spring-lab-01] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/springlab]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: springlab/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-27T01:43:44.707+05:00  INFO 22555 --- [spring-lab-01] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-27T01:43:44.736+05:00  INFO 22555 --- [spring-lab-01] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T01:43:44.784+05:00  INFO 22555 --- [spring-lab-01] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-27T01:43:45.250+05:00  INFO 22555 --- [spring-lab-01] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name databaseUserDetailsService
+2026-11-27T01:43:45.590+05:00  INFO 22555 --- [spring-lab-01] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-11-27T01:43:45.628+05:00  INFO 22555 --- [spring-lab-01] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-11-27T01:43:45.633+05:00  INFO 22555 --- [spring-lab-01] [           main] k.i.s.SpringLab01Application             : Started SpringLab01Application in 2.918 seconds (process running for 3.115)
+2026-11-27T01:43:46.613+05:00  INFO 22555 --- [spring-lab-01] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-27T01:43:46.613+05:00  INFO 22555 --- [spring-lab-01] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-27T01:43:46.614+05:00  INFO 22555 --- [spring-lab-01] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-11-27T01:44:00.041+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : update loan l1_0 set overdue=true where l1_0.due_date<? and l1_0.returned=false and l1_0.overdue=false
+2026-11-27T01:44:00.081+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : select count(l1_0.id) from loan l1_0 where l1_0.overdue=true
+2026-11-27T01:44:00.086+05:00  INFO 22555 --- [spring-lab-01] [        sched-1] k.i.s.loan.OverdueMarkingJob             : overdue marking for 2026-11-27: 0 loan(s) newly marked, 2 overdue in total (thread sched-1)
+2026-11-27T01:44:00.490+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-2] org.hibernate.SQL                        : select au1_0.id,au1_0.enabled,au1_0.password_hash,au1_0.username from app_user au1_0 where au1_0.username=?
+2026-11-27T01:44:00.505+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-2] org.hibernate.SQL                        : select r1_0.user_id,r1_0.role from user_role r1_0 where r1_0.user_id=?
+2026-11-27T01:44:01.860+05:00  WARN 22555 --- [spring-lab-01] [io-8080-exec-10] k.i.s.config.CustomAccessDeniedHandler   : [ACCESS DENIED] user=anonymous PUT /api/authors/4 : Invalid CSRF Token 'null' was found on the request parameter '_csrf' or header 'X-CSRF-TOKEN'.
+2026-11-27T01:44:05.157+05:00  WARN 22555 --- [spring-lab-01] [nio-8080-exec-2] k.i.s.config.CustomAccessDeniedHandler   : [ACCESS DENIED] user=anonymous PUT /api/authors/4 : Invalid CSRF Token 'null' was found on the request parameter '_csrf' or header 'X-CSRF-TOKEN'.
+2026-11-27T01:44:14.360+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-6] org.hibernate.SQL                        : select au1_0.id,au1_0.enabled,au1_0.password_hash,au1_0.username from app_user au1_0 where au1_0.username=?
+2026-11-27T01:44:14.362+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-6] org.hibernate.SQL                        : select r1_0.user_id,r1_0.role from user_role r1_0 where r1_0.user_id=?
+2026-11-27T01:44:14.458+05:00 DEBUG 22555 --- [spring-lab-01] [io-8080-exec-10] org.hibernate.SQL                        : select a1_0.id,a1_0.country,a1_0.name from author a1_0 where a1_0.id=?
+2026-11-27T01:44:15.588+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-4] org.hibernate.SQL                        : select a1_0.id,a1_0.country,a1_0.name from author a1_0 where a1_0.id=?
+2026-11-27T01:44:15.600+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-4] org.hibernate.SQL                        : update author set country=?,name=? where id=?
+2026-11-27T01:44:16.149+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-6] org.hibernate.SQL                        : select a1_0.id,a1_0.country,a1_0.name from author a1_0 where a1_0.id=?
+2026-11-27T01:44:18.889+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-6] org.hibernate.SQL                        : select a1_0.id,a1_0.country,a1_0.name from author a1_0 where a1_0.id=?
+2026-11-27T01:44:18.891+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-6] org.hibernate.SQL                        : update author set country=?,name=? where id=?
+2026-11-27T01:44:20.011+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : update loan l1_0 set overdue=true where l1_0.due_date<? and l1_0.returned=false and l1_0.overdue=false
+2026-11-27T01:44:20.013+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : select count(l1_0.id) from loan l1_0 where l1_0.overdue=true
+2026-11-27T01:44:20.015+05:00  INFO 22555 --- [spring-lab-01] [        sched-1] k.i.s.loan.OverdueMarkingJob             : overdue marking for 2026-11-27: 0 loan(s) newly marked, 2 overdue in total (thread sched-1)
+2026-11-27T01:44:29.054+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-8] org.hibernate.SQL                        : select au1_0.id from app_user au1_0 where au1_0.username=? fetch first ? rows only
+2026-11-27T01:44:29.133+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-8] org.hibernate.SQL                        : insert into app_user (enabled,password_hash,username) values (?,?,?)
+2026-11-27T01:44:29.146+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-8] org.hibernate.SQL                        : insert into user_role (user_id,role) values (?,?)
+2026-11-27T01:44:29.149+05:00  INFO 22555 --- [spring-lab-01] [nio-8080-exec-8] k.i.spring_lab_01.user.SignupController  : signup of user 3 handled on http-nio-8080-exec-8
+2026-11-27T01:44:29.154+05:00 DEBUG 22555 --- [spring-lab-01] [        async-1] org.hibernate.SQL                        : select au1_0.id,au1_0.enabled,au1_0.password_hash,r1_0.user_id,r1_0.role,au1_0.username from app_user au1_0 left join user_role r1_0 on au1_0.id=r1_0.user_id where au1_0.id=?
+2026-11-27T01:44:29.156+05:00  INFO 22555 --- [spring-lab-01] [        async-1] k.i.s.notify.NotificationService         : sending welcome e-mail to user 3 (reader_1795725869) on async-1
+2026-11-27T01:44:31.161+05:00  INFO 22555 --- [spring-lab-01] [        async-1] k.i.s.notify.NotificationService         : welcome e-mail to user 3 sent on async-1
+2026-11-27T01:44:31.703+05:00 DEBUG 22555 --- [spring-lab-01] [io-8080-exec-10] org.hibernate.SQL                        : select au1_0.id from app_user au1_0 where au1_0.username=? fetch first ? rows only
+2026-11-27T01:44:31.777+05:00 DEBUG 22555 --- [spring-lab-01] [io-8080-exec-10] org.hibernate.SQL                        : insert into app_user (enabled,password_hash,username) values (?,?,?)
+2026-11-27T01:44:31.778+05:00 DEBUG 22555 --- [spring-lab-01] [io-8080-exec-10] org.hibernate.SQL                        : insert into user_role (user_id,role) values (?,?)
+2026-11-27T01:44:31.780+05:00  INFO 22555 --- [spring-lab-01] [io-8080-exec-10] k.i.spring_lab_01.user.SignupController  : signup of user 4 handled on http-nio-8080-exec-10 (self-invocation variant)
+2026-11-27T01:44:31.780+05:00 DEBUG 22555 --- [spring-lab-01] [io-8080-exec-10] org.hibernate.SQL                        : select au1_0.id,au1_0.enabled,au1_0.password_hash,r1_0.user_id,r1_0.role,au1_0.username from app_user au1_0 left join user_role r1_0 on au1_0.id=r1_0.user_id where au1_0.id=?
+2026-11-27T01:44:31.782+05:00  INFO 22555 --- [spring-lab-01] [io-8080-exec-10] k.i.s.notify.NotificationService         : sending welcome e-mail to user 4 (reader_1795725869_self) on http-nio-8080-exec-10
+2026-11-27T01:44:33.787+05:00  INFO 22555 --- [spring-lab-01] [io-8080-exec-10] k.i.s.notify.NotificationService         : welcome e-mail to user 4 sent on http-nio-8080-exec-10
+2026-11-27T01:44:40.008+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : update loan l1_0 set overdue=true where l1_0.due_date<? and l1_0.returned=false and l1_0.overdue=false
+2026-11-27T01:44:40.010+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : select count(l1_0.id) from loan l1_0 where l1_0.overdue=true
+2026-11-27T01:44:40.011+05:00  INFO 22555 --- [spring-lab-01] [        sched-1] k.i.s.loan.OverdueMarkingJob             : overdue marking for 2026-11-27: 0 loan(s) newly marked, 2 overdue in total (thread sched-1)
+2026-11-27T01:44:43.490+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-2] org.hibernate.SQL                        : select au1_0.id from app_user au1_0 where au1_0.username=? fetch first ? rows only
+2026-11-27T01:44:43.562+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-2] org.hibernate.SQL                        : insert into app_user (enabled,password_hash,username) values (?,?,?)
+2026-11-27T01:44:43.564+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-2] org.hibernate.SQL                        : insert into user_role (user_id,role) values (?,?)
+2026-11-27T01:44:43.565+05:00  INFO 22555 --- [spring-lab-01] [nio-8080-exec-2] k.i.spring_lab_01.user.SignupController  : signup of user 5 handled on http-nio-8080-exec-2
+2026-11-27T01:44:43.566+05:00 DEBUG 22555 --- [spring-lab-01] [        async-2] org.hibernate.SQL                        : select au1_0.id,au1_0.enabled,au1_0.password_hash,r1_0.user_id,r1_0.role,au1_0.username from app_user au1_0 left join user_role r1_0 on au1_0.id=r1_0.user_id where au1_0.id=?
+2026-11-27T01:44:43.568+05:00  INFO 22555 --- [spring-lab-01] [        async-2] k.i.s.notify.NotificationService         : sending welcome e-mail to user 5 (reader_1795725883) on async-2
+2026-11-27T01:44:45.573+05:00  INFO 22555 --- [spring-lab-01] [        async-2] k.i.s.notify.NotificationService         : welcome e-mail to user 5 sent on async-2
+2026-11-27T01:44:46.111+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-4] org.hibernate.SQL                        : select au1_0.id from app_user au1_0 where au1_0.username=? fetch first ? rows only
+2026-11-27T01:44:46.184+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-4] org.hibernate.SQL                        : insert into app_user (enabled,password_hash,username) values (?,?,?)
+2026-11-27T01:44:46.187+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-4] org.hibernate.SQL                        : insert into user_role (user_id,role) values (?,?)
+2026-11-27T01:44:46.188+05:00  INFO 22555 --- [spring-lab-01] [nio-8080-exec-4] k.i.spring_lab_01.user.SignupController  : signup of user 6 handled on http-nio-8080-exec-4 (self-invocation variant)
+2026-11-27T01:44:46.189+05:00 DEBUG 22555 --- [spring-lab-01] [nio-8080-exec-4] org.hibernate.SQL                        : select au1_0.id,au1_0.enabled,au1_0.password_hash,r1_0.user_id,r1_0.role,au1_0.username from app_user au1_0 left join user_role r1_0 on au1_0.id=r1_0.user_id where au1_0.id=?
+2026-11-27T01:44:46.190+05:00  INFO 22555 --- [spring-lab-01] [nio-8080-exec-4] k.i.s.notify.NotificationService         : sending welcome e-mail to user 6 (reader_1795725883_self) on http-nio-8080-exec-4
+2026-11-27T01:44:48.195+05:00  INFO 22555 --- [spring-lab-01] [nio-8080-exec-4] k.i.s.notify.NotificationService         : welcome e-mail to user 6 sent on http-nio-8080-exec-4
+2026-11-27T01:45:00.015+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : update loan l1_0 set overdue=true where l1_0.due_date<? and l1_0.returned=false and l1_0.overdue=false
+2026-11-27T01:45:00.019+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : select count(l1_0.id) from loan l1_0 where l1_0.overdue=true
+2026-11-27T01:45:00.021+05:00  INFO 22555 --- [spring-lab-01] [        sched-1] k.i.s.loan.OverdueMarkingJob             : overdue marking for 2026-11-27: 1 loan(s) newly marked, 3 overdue in total (thread sched-1)
+2026-11-27T01:45:20.026+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : update loan l1_0 set overdue=true where l1_0.due_date<? and l1_0.returned=false and l1_0.overdue=false
+2026-11-27T01:45:20.051+05:00 DEBUG 22555 --- [spring-lab-01] [        sched-1] org.hibernate.SQL                        : select count(l1_0.id) from loan l1_0 where l1_0.overdue=true
+2026-11-27T01:45:20.053+05:00  INFO 22555 --- [spring-lab-01] [        sched-1] k.i.s.loan.OverdueMarkingJob             : overdue marking for 2026-11-27: 0 loan(s) newly marked, 3 overdue in total (thread sched-1)
+2026-11-27T01:45:31.670+05:00  INFO 22555 --- [spring-lab-01] [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-11-27T01:45:31.674+05:00  INFO 22555 --- [spring-lab-01] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-11-27T01:45:31.687+05:00  INFO 22555 --- [spring-lab-01] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T01:45:31.691+05:00  INFO 22555 --- [spring-lab-01] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-27T01:45:31.692+05:00  INFO 22555 --- [spring-lab-01] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

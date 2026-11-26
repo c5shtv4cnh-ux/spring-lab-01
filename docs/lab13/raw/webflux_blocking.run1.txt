@@ -1,0 +1,52 @@
+$ oha --no-tui -n 2000 -c 200 http://127.0.0.1:8081/blocking
+Summary:
+  Success rate:	7.80%
+  Total:	8.0862 sec
+  Slowest:	8.0829 sec
+  Fastest:	0.4033 sec
+  Average:	4.1466 sec
+  Requests/sec:	247.3353
+
+  Total data:	6.25 KiB
+  Size/request:	41 B
+  Size/sec:	790 B
+
+Response time histogram:
+  0.403 sec [1]  |■■
+  1.171 sec [15] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  1.939 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  2.707 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  3.475 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  4.243 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  5.011 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  5.779 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  6.547 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  7.315 sec [16] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  8.083 sec [12] |■■■■■■■■■■■■■■■■■■■■■■■■
+
+Response time distribution:
+  10.00% in 0.8091 sec
+  25.00% in 2.0246 sec
+  50.00% in 4.0464 sec
+  75.00% in 6.0644 sec
+  90.00% in 7.2758 sec
+  95.00% in 7.6800 sec
+  99.00% in 8.0828 sec
+  99.90% in 8.0829 sec
+  99.99% in 8.0829 sec
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	0.0022 sec, 0.0015 sec, 0.0030 sec
+  DNS-lookup:	0.0000 sec, 0.0000 sec, 0.0001 sec
+  First byte:	4.1466 sec, 0.4033 sec, 8.0829 sec
+
+Status code distribution:
+  [200] 156 responses
+
+Error distribution:
+  [1036] Connection reset by peer (os error 54)
+  [738] connection error
+  [39] error writing a body to connection
+  [24] operation was canceled
+  [7] Invalid argument (os error 22)

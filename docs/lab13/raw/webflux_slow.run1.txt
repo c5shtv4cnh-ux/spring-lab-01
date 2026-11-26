@@ -1,0 +1,45 @@
+$ oha --no-tui -n 2000 -c 200 http://127.0.0.1:8081/slow
+Summary:
+  Success rate:	100.00%
+  Total:	4073.2699 ms
+  Slowest:	418.6334 ms
+  Fastest:	400.6122 ms
+  Average:	406.7165 ms
+  Requests/sec:	491.0060
+
+  Total data:	64.45 KiB
+  Size/request:	33 B
+  Size/sec:	15.82 KiB
+
+Response time histogram:
+  400.612 ms [1]   |
+  402.414 ms [188] |■■■■■■■■■■
+  404.216 ms [472] |■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  406.019 ms [547] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  407.821 ms [246] |■■■■■■■■■■■■■■
+  409.623 ms [126] |■■■■■■■
+  411.425 ms [42]  |■■
+  413.227 ms [122] |■■■■■■■
+  415.029 ms [125] |■■■■■■■
+  416.831 ms [69]  |■■■■
+  418.633 ms [62]  |■■■
+
+Response time distribution:
+  10.00% in 402.4447 ms
+  25.00% in 403.5803 ms
+  50.00% in 405.4166 ms
+  75.00% in 408.3773 ms
+  90.00% in 413.7572 ms
+  95.00% in 415.6875 ms
+  99.00% in 417.5895 ms
+  99.90% in 418.6265 ms
+  99.99% in 418.6334 ms
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	2.3625 ms, 1.5425 ms, 2.9858 ms
+  DNS-lookup:	0.0025 ms, 0.0009 ms, 0.0656 ms
+  First byte:	406.7163 ms, 400.6121 ms, 418.6333 ms
+
+Status code distribution:
+  [200] 2000 responses

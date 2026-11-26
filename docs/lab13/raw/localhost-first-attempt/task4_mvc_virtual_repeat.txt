@@ -1,0 +1,45 @@
+$ oha --no-tui -n 2000 -c 200 http://localhost:8080/api/slow   # repeat, same instance
+Summary:
+  Success rate:	100.00%
+  Total:	4212.1591 ms
+  Slowest:	426.7411 ms
+  Fastest:	414.9705 ms
+  Average:	420.8585 ms
+  Requests/sec:	474.8159
+
+  Total data:	187.50 KiB
+  Size/request:	96 B
+  Size/sec:	44.51 KiB
+
+Response time histogram:
+  414.970 ms [1]   |
+  416.148 ms [112] |■■■■■■■■
+  417.325 ms [134] |■■■■■■■■■■
+  418.502 ms [140] |■■■■■■■■■■■
+  419.679 ms [225] |■■■■■■■■■■■■■■■■■
+  420.856 ms [404] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  422.033 ms [316] |■■■■■■■■■■■■■■■■■■■■■■■■■
+  423.210 ms [160] |■■■■■■■■■■■■
+  424.387 ms [280] |■■■■■■■■■■■■■■■■■■■■■■
+  425.564 ms [208] |■■■■■■■■■■■■■■■■
+  426.741 ms [20]  |■
+
+Response time distribution:
+  10.00% in 416.9476 ms
+  25.00% in 419.0461 ms
+  50.00% in 420.8103 ms
+  75.00% in 423.2232 ms
+  90.00% in 424.4983 ms
+  95.00% in 424.9296 ms
+  99.00% in 425.5983 ms
+  99.90% in 426.7342 ms
+  99.99% in 426.7411 ms
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	2.1809 ms, 0.9506 ms, 3.5842 ms
+  DNS-lookup:	0.0032 ms, 0.0007 ms, 0.0810 ms
+  First byte:	420.8581 ms, 414.9703 ms, 426.7410 ms
+
+Status code distribution:
+  [200] 2000 responses

@@ -1,0 +1,45 @@
+$ oha --no-tui -n 2000 -c 200 http://127.0.0.1:8081/slow
+Summary:
+  Success rate:	100.00%
+  Total:	4072.4547 ms
+  Slowest:	415.7398 ms
+  Fastest:	400.8130 ms
+  Average:	406.5397 ms
+  Requests/sec:	491.1043
+
+  Total data:	64.45 KiB
+  Size/request:	33 B
+  Size/sec:	15.83 KiB
+
+Response time histogram:
+  400.813 ms [1]   |
+  402.306 ms [197] |■■■■■■■■■■■■■■■■■
+  403.798 ms [308] |■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  405.291 ms [359] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  406.784 ms [320] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  408.276 ms [222] |■■■■■■■■■■■■■■■■■■■
+  409.769 ms [192] |■■■■■■■■■■■■■■■■■
+  411.262 ms [132] |■■■■■■■■■■■
+  412.754 ms [115] |■■■■■■■■■■
+  414.247 ms [126] |■■■■■■■■■■■
+  415.740 ms [28]  |■■
+
+Response time distribution:
+  10.00% in 402.3122 ms
+  25.00% in 403.7570 ms
+  50.00% in 405.8132 ms
+  75.00% in 408.8282 ms
+  90.00% in 411.9645 ms
+  95.00% in 413.2737 ms
+  99.00% in 414.3830 ms
+  99.90% in 415.3715 ms
+  99.99% in 415.7398 ms
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	2.6566 ms, 1.4831 ms, 4.1123 ms
+  DNS-lookup:	0.0024 ms, 0.0009 ms, 0.0828 ms
+  First byte:	406.5395 ms, 400.8129 ms, 415.7397 ms
+
+Status code distribution:
+  [200] 2000 responses

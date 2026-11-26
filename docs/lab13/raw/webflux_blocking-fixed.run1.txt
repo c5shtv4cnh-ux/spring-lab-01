@@ -1,0 +1,45 @@
+$ oha --no-tui -n 2000 -c 200 http://127.0.0.1:8081/blocking-fixed
+Summary:
+  Success rate:	100.00%
+  Total:	11.2987 sec
+  Slowest:	2.0288 sec
+  Fastest:	0.4057 sec
+  Average:	0.9824 sec
+  Requests/sec:	177.0109
+
+  Total data:	79.60 KiB
+  Size/request:	40 B
+  Size/sec:	7.04 KiB
+
+Response time histogram:
+  0.406 sec [1]    |
+  0.568 sec [79]   |■■
+  0.730 sec [0]    |
+  0.893 sec [1022] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  1.055 sec [0]    |
+  1.217 sec [842]  |■■■■■■■■■■■■■■■■■■■■■■■■■■
+  1.380 sec [14]   |
+  1.542 sec [0]    |
+  1.704 sec [33]   |■
+  1.867 sec [0]    |
+  2.029 sec [9]    |
+
+Response time distribution:
+  10.00% in 0.8042 sec
+  25.00% in 0.8072 sec
+  50.00% in 0.8109 sec
+  75.00% in 1.2088 sec
+  90.00% in 1.2123 sec
+  95.00% in 1.2142 sec
+  99.00% in 1.6155 sec
+  99.90% in 2.0261 sec
+  99.99% in 2.0288 sec
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	0.0026 sec, 0.0015 sec, 0.0034 sec
+  DNS-lookup:	0.0000 sec, 0.0000 sec, 0.0001 sec
+  First byte:	0.9824 sec, 0.4057 sec, 2.0288 sec
+
+Status code distribution:
+  [200] 2000 responses
