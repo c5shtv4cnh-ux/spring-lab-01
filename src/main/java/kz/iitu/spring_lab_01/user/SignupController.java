@@ -2,6 +2,7 @@ package kz.iitu.spring_lab_01.user;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import kz.iitu.spring_lab_01.notify.NotificationService;
 import org.slf4j.Logger;
@@ -21,7 +22,8 @@ public class SignupController {
 
     private static final Logger log = LoggerFactory.getLogger(SignupController.class);
 
-    public record SignupRequest(@NotBlank @Size(max = 60) String username,
+    /** The username is later written to the log: letters, digits, '.', '_' and '-' only (no CR/LF injection). */
+    public record SignupRequest(@NotBlank @Pattern(regexp = "[A-Za-z0-9._-]{3,60}") String username,
                                 @NotBlank @Size(min = 6, max = 72) String password) { }
 
     private final SignupService signups;
